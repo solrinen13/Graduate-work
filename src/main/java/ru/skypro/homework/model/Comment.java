@@ -17,10 +17,6 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
-     @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "ad_id")
-     private Ad ad;
-
      @Id
       @GeneratedValue (strategy = GenerationType.IDENTITY)
       @Column (nullable = false)
@@ -42,5 +38,4 @@ public class Comment {
 
       @Column(name = "text", nullable = false, length = 1000)
       private String text;
-
 }

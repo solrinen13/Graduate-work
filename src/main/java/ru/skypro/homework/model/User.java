@@ -19,12 +19,6 @@ public class User {
       @GeneratedValue(strategy = GenerationType.IDENTITY) // cтратегия генерации
       private Integer id;
 
-      @Column(name = "email", nullable = false, length = 32)
-      private String email;
-
-      @Column(name = "password")
-      private String password;
-
       @Column(name = "firstName", length = 32)
       private String firstName;
 
@@ -34,10 +28,14 @@ public class User {
       @Column(name = "phone")
       private String phone;
 
+      @Column(name = "email", nullable = false, length = 32)
+      private String email;
+
+      @JoinColumn(name = "image")
+      private String image;
+
       @Column(name = "role")
       @Enumerated(EnumType.STRING) // значение роли будет храниться как строка
       private Role role;
 
-      @Column(name = "image")
-      private String image;
 }
