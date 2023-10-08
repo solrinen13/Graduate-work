@@ -17,7 +17,7 @@ public class Ad {
 
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)
-      private Integer id;
+      private Integer pk;
 
       @ManyToOne(fetch = FetchType.LAZY)
       @JoinColumn(name = "author_id", nullable = false)

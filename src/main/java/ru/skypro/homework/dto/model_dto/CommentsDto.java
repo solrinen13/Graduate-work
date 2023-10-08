@@ -2,7 +2,6 @@ package ru.skypro.homework.dto.model_dto;
 
 import lombok.Data;
 
-
 import java.util.List;
 
 @Data
