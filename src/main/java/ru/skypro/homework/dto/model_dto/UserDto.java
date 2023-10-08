@@ -1,5 +1,6 @@
 package ru.skypro.homework.dto.model_dto;
 import lombok.*;
+import ru.skypro.homework.dto.Role;
 
 import javax.validation.constraints.Pattern;
 
