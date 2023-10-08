@@ -1,7 +1,9 @@
 package ru.skypro.homework.model;
 import lombok.*;
 import ru.skypro.homework.dto.Role;
+
 import javax.persistence.*;
+
 
 /**
  * Класс пользователя системы онлайн-продаж.
@@ -19,17 +21,24 @@ public class User {
       @GeneratedValue(strategy = GenerationType.IDENTITY) // cтратегия генерации
       private Integer id;
 
-      @Column(name = "firstName", length = 32)
+      @Column(name = "firstName")
       private String firstName;
 
-      @Column(name = "lastName", length = 32)
+      @Column(name = "lastName")
       private String lastName;
 
+      /**
+       * Номер телефона пользователя в формате +7 (XXX) XXX-XX-XX.
+       */
+      //@Pattern(regexp = "\\+7\\s?\\(?\\d{3}\\)?\\s?\\d{3}-?\\d{2}-?\\d{2}")
       @Column(name = "phone")
       private String phone;
 
-      @Column(name = "email", nullable = false, length = 32)
+      @Column(name = "email")
       private String email;
+
+      @Column(name = "password")
+      private String password;
 
       @JoinColumn(name = "image")
       private String image;
