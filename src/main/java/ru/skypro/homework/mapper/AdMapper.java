@@ -25,7 +25,7 @@ public interface AdMapper {
 
       @Named("imageToPathString")
       default String imageToPathString(Image image) {
-            return image != null && image.getId() != null ? ("/ads/image/" + image.getId()) : null;
+            return image != null ? ("/ads/image/" + image.getId()) : null;
       }
 
       List <AdDto> toAdsDto(List<Ad> ads);

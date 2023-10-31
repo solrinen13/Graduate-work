@@ -3,6 +3,7 @@ package ru.skypro.homework.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,6 @@ public class AdServiceImpl implements AdService {
         log.info("Был вызван метод для удаления объявления по идентификатору");
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
         Ad ad = adRepository.findById(id).orElseThrow();
-        securityCheck.checkAd(id);
         if (securityCheck.isAdmin(user) || securityCheck.isAuthorAd(user, ad)) {
             commentRepository.deleteByAdId(id);
             if (ad.getImage() != null) {
@@ -98,8 +98,6 @@ public class AdServiceImpl implements AdService {
         log.info("Был вызван метод для обновления объявления по идентификатору");
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
         Ad ad = adRepository.findById(id).orElseThrow();
-        securityCheck.checkAd(id);
-
         if (securityCheck.isAdmin(user) || securityCheck.isAuthorAd(user, ad)) {
             ad.setDescription(createOrUpdateAdDto.getDescription());
             ad.setTitle(createOrUpdateAdDto.getTitle());

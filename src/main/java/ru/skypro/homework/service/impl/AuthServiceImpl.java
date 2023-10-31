@@ -1,4 +1,4 @@
-package ru.skypro.homework.security;
+package ru.skypro.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ import ru.skypro.homework.exceptions.SuchEmailAlreadyExist;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.model.User;
 import ru.skypro.homework.repository.UserRepository;
+import ru.skypro.homework.service.AuthService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,18 +41,11 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authManager;
 
     @Override
-    public boolean login(String userName, String password, HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken authReq
-                = new UsernamePasswordAuthenticationToken(userName, password);
-        Authentication auth = authManager.authenticate(authReq);
-
-        SecurityContext sc = SecurityContextHolder.getContext();
-        sc.setAuthentication(auth);
-        HttpSession session = request.getSession(true);
-        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
-        return true;
+    public boolean login(String userName, String password) {
+        return userRepository.findByEmail(userName)
+                .map(user -> encoder.matches(password, user.getPassword()))
+                .orElse(false);
     }
-
     @Override
     public boolean register (Register register) {
         if (userRepository.findByEmail(register.getUsername()).isPresent()) {
