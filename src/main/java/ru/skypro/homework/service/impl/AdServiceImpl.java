@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -45,7 +47,7 @@ public class AdServiceImpl implements AdService {
     @Override
     public List<AdDto> getAllAds() {
         log.info("Был вызван метод для получения всех объявлений");
-        return adMapper.toAdsDto(adRepository.findAll());
+        return adRepository.findAll().stream().map(adMapper::toAdDto).collect(Collectors.toList());
     }
 
     @Override
@@ -110,7 +112,7 @@ public class AdServiceImpl implements AdService {
     public List<AdDto> getAuthorizedUserAds(Authentication authentication) {
         log.info("Был вызван метод для получения объявлений авторизованного пользователя");
         User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
-        return adMapper.toAdsDto(adRepository.findAllByAuthorId(user.getId()));
+        return adRepository.findAllByAuthorId(user.getId()).stream().map(adMapper::toAdDto).collect(Collectors.toList());
     }
 
     @Override
