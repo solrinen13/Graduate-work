@@ -51,3 +51,13 @@ The task of the team Unassembled was to write the backend part of the site in Ja
 - To run method **main** in the file **[HomeworkApplication.java](src/main/java/ru/skypro/homework/HomeworkApplication.java)**
 
 After completing all the actions, the site will be accessible by following the link http://localhost:3000 and Swagger by [link](https://editor.swagger.io/).
+
+## Демо
+- Регистрация и авторизация пользователя. Изменение своих данных, аватара и пароля
+![ScreenRecorderProject7](https://github.com/Caveri95/ClothesShop/assets/115732440/865a751f-2877-4ecb-ae2f-777fcb1d3495)
+
+- Создание объявления и комментария
+![ScreenRecorderProject14](https://github.com/Caveri95/ClothesShop/assets/115732440/6e70b1f3-c01d-4939-b93f-b4c43aba9db6)
+
+- Редактирование объявления
+![ScreenRecorderProject15](https://github.com/Caveri95/ClothesShop/assets/115732440/11a90886-6575-4fc0-bb97-0f52e3ab22ab)
