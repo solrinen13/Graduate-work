@@ -24,6 +24,7 @@ import javax.transaction.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Реализация интерфейса CommentService для управления комментариями.
@@ -43,21 +44,22 @@ public class CommentServiceImpl implements CommentService {
       @Override
       public List <CommentDto> getAdComments(Integer id) {
             log.info("Метод получения комментариев");
-            return commentMapper.toCommentsDto (commentRepository.findAllByAdId(id));
+            User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow();
+            Ad ad = adRepository.findById(id).orElseThrow();
+            List<Comment> all = commentRepository.findAllByAdId(ad.getId());
+            return all.stream()
+                    .map(comment -> commentMapper.toCommentDto(comment, user))
+                    .collect(Collectors.toList());
       }
 
       @Override
-      public Comment addCommentToAd(Integer id, CreateOrUpdateCommentDto createOrUpdateCommentDto,
+      public CommentDto addCommentToAd(Integer id, CreateOrUpdateCommentDto createOrUpdateCommentDto,
                                      Authentication authentication) {
-            User user = userRepository.findByEmail(SecurityContextHolder.getContext()
-                      .getAuthentication().getName()).orElseThrow ();
+            User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow();
             Ad ad = adRepository.findById(id).orElseThrow();
             log.info("Был вызван метод для добавления комментария к объявлениюу");
-            Comment comment = commentMapper.toCommentyCr (createOrUpdateCommentDto);
-            comment.setAuthor(user);
-            comment.setAd(ad);
-            comment.setCreatedAt(Instant.now());
-            return commentRepository.save(comment);
+            Comment comment = commentRepository.save(new Comment(null, ad, user, Instant.now(), createOrUpdateCommentDto.getText()));
+            return commentMapper.toCommentDto(comment, user);
       }
 
       @Override
@@ -83,6 +85,6 @@ public class CommentServiceImpl implements CommentService {
             } else {
                   throw new RuntimeException();
             }
-            return commentMapper.toCommentDto(commentRepository.save(comment));
+            return commentMapper.toCommentDto(comment, user);
       }
 }

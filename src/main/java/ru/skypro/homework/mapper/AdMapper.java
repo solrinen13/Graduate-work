@@ -29,7 +29,6 @@ public interface AdMapper {
             return image != null ? ("/ads/image/" + image.getId()) : null;
       }
 
-      //AdsDto toAdsDto(List<Ad> ads);
 
       @Mapping(target = "id", ignore = true)
       @Mapping(target = "author", ignore = true)

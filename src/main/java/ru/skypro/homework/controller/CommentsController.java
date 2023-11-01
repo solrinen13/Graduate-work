@@ -53,7 +53,7 @@ public class CommentsController {
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     @PostMapping("/{id}/comments")
-    public ResponseEntity<Comment> addCommentToAd(@PathVariable("id") Integer id,
+    public ResponseEntity<CommentDto> addCommentToAd(@PathVariable("id") Integer id,
                                                   @RequestBody @Valid CreateOrUpdateCommentDto createOrUpdateCommentDto,
                                                   Authentication authentication) {
         return ResponseEntity.ok(commentService.addCommentToAd(id, createOrUpdateCommentDto, authentication));

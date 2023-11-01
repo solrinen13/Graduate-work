@@ -20,7 +20,7 @@ public class Comment {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (nullable = false)
+    @Column (nullable = false, name = "id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
