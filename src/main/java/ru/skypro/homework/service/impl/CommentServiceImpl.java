@@ -44,11 +44,9 @@ public class CommentServiceImpl implements CommentService {
       @Override
       public List <CommentDto> getAdComments(Integer id) {
             log.info("Метод получения комментариев");
-            User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow();
-            Ad ad = adRepository.findById(id).orElseThrow();
-            List<Comment> all = commentRepository.findAllByAdId(ad.getId());
-            return all.stream()
-                    .map(comment -> commentMapper.toCommentDto(comment, user))
+            List<Comment> allByAdId = commentRepository.findAllByAdId(id);
+            return allByAdId.stream()
+                    .map(comment -> commentMapper.toCommentDto(comment, comment.getAuthor()))
                     .collect(Collectors.toList());
       }
 
