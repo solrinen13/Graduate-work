@@ -56,7 +56,7 @@ public class CommentServiceImpl implements CommentService {
             User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow();
             Ad ad = adRepository.findById(id).orElseThrow();
             log.info("Был вызван метод для добавления комментария к объявлениюу");
-            Comment comment = commentRepository.save(new Comment(null, ad, user, Instant.now(), createOrUpdateCommentDto.getText()));
+            Comment comment = commentRepository.save(new Comment(ad, user, Instant.now(), createOrUpdateCommentDto.getText()));
             return commentMapper.toCommentDto(comment, user);
       }
 

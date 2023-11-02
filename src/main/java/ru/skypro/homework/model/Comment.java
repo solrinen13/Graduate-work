@@ -38,4 +38,6 @@ public class Comment {
     @Column(name = "text", nullable = false, length = 1000)
     private String text;
 
+    public Comment(Ad ad, User user, Instant now, String text) {
+    }
 }
