@@ -13,13 +13,27 @@ import java.util.List;
 
 public interface CommentService {
 
-      List <CommentDto> getAdComments (Integer id); // Получение комментариев объявления
+      /**
+       * Получения комментариев объявления
+       * @return {@code List<CommentDto>}
+       */
+      List<CommentDto> getAdComments (Integer id);
 
-      // Добавление комментария к объявлению
+      /**
+       * Добавление комментария к объявлению
+       * @return {@code CommentDto}
+       */
       CommentDto addCommentToAd (Integer id , CreateOrUpdateCommentDto createOrUpdateCommentDto , Authentication authentication);
 
-      void deleteComment (Integer adId , Integer commentId , Authentication authentication); // Удаление комментария
+      /**
+       * Удаление комментария
+       */
+      void deleteComment (Integer adId , Integer commentId , Authentication authentication);
 
-      // Обновление комментария
+      /**
+       * Обновление комментария
+       *<p> Обновлять может только автор комментария или админ
+       * @return {@code CommentDto}
+       */
       CommentDto updateComment (Integer adId , Integer commentId , CreateOrUpdateCommentDto createOrUpdateCommentDto);
 }

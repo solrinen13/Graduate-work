@@ -21,13 +21,13 @@ public interface CommentMapper {
       @Mapping(target = "authorFirstName", source = "user.firstName")
       @Mapping(target = "createdAt", qualifiedByName = "instantToInteger")
       @Mapping(target = "text", source = "comment.text")
-      CommentDto toCommentDto(Comment comment, User user); // конвертация сущности в DTO
+      CommentDto toCommentDto(Comment comment, User user);
 
       @Mapping(target = "id", ignore = true)
       @Mapping(target = "author", ignore = true)
       @Mapping(target = "createdAt", ignore = true)
       @Mapping(target = "ad", ignore = true)
-      Comment toComment(CreateOrUpdateCommentDto dto); // конвертация новых комментарий
+      Comment toComment(CreateOrUpdateCommentDto dto);
 
       @Named("instantToInteger")
       default long instantToInteger(Instant instant) {

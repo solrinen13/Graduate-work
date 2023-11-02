@@ -9,27 +9,51 @@ import java.util.List;
 
 
 public interface AdService {
-      List <AdDto> getAllAds ();  // метод для получения всех объявлений
+      /**
+       * Получение списка всех объявлений
+       * @return {@code List<AdDto>}
+       */
+      List<AdDto> getAllAds ();
 
-      AdDto addAd (CreateOrUpdateAdDto createOrUpdateAdDto , MultipartFile image); // метод добавляет объявление
+      /**
+       * Добавление обЪявления
+       *<p>
+       * Добавлять может только зарегестрированный пользователь
+       * @return {@code AdDto}
+       */
+      AdDto addAd (CreateOrUpdateAdDto createOrUpdateAdDto , MultipartFile image);
 
-      ExtendedAdDto getAdInformation (Integer id); // получение информации об объявлении
+      /**
+       * Получение информации об объявлении
+       * @return {@code ExtendedAdDto}
+       * @param id идентификатор объявления, не может быть {@code null}.
+       */
+      ExtendedAdDto getAdInformation (Integer id);
 
       /**
        * Удаление объявления с комментарием по его идентификатору из базы данных
-       * может быть сделано автором объявления и админом
-       *
+       *<p> Может быть сделано автором объявления и админом
        * @param id идентификатор объявления, не может быть {@code null}.
        */
-      void deleteAd (Integer id , Authentication authentication); // удаление объявления
+      void deleteAd (Integer id , Authentication authentication);
 
+      /**
+       * Обновление объявления
+       *<p> Обновлять может только автор объявления или админ
+       * @return {@code AdDto}
+       */
       AdDto updateAdInformation (Integer id , CreateOrUpdateAdDto createOrUpdateAdDto ,
-                                 Authentication authentication); // обновление информации об объявлении
+                                 Authentication authentication);
 
-      List <AdDto> getAuthorizedUserAds (Authentication authentication); // получение объявлений авторизованного пользователя void updateImageAd (Integer adsId , MultipartFile imageFile ,
+      /**
+       * Получения объявлений авторизованного пользователя
+       * @return {@code List<AdDto>}
+       */
+      List<AdDto> getAuthorizedUserAds (Authentication authentication);
 
-
-      // обновление картинки объявления
+      /**
+       * Обновление картинки объявления
+       */
       void updateImageAd (Integer adsId , MultipartFile imageFile, Authentication authentication) throws Exception;
 }
 

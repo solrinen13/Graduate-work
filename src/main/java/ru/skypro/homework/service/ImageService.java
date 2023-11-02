@@ -10,7 +10,15 @@ import java.io.IOException;
  */
 public interface ImageService {
 
-      Image uploadImage (MultipartFile multipartFile) throws IOException; // Сохранение изображения в базу данных
+      /**
+       * Загрузка картинки
+       * @return {@code Image}
+       */
+      Image uploadImage (MultipartFile multipartFile) throws IOException;
 
-      byte[] getImage (Integer imageId); // Получение изображения из базы данных
+      /**
+       * Получение изображения из базы данных
+       * @return {@code byte[]}
+       */
+      byte[] getImage (Integer imageId);
 }

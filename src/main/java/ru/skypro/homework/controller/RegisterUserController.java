@@ -1,5 +1,7 @@
 package ru.skypro.homework.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,10 @@ public class RegisterUserController {
 
     private final AuthService authService;
 
+    @Operation(summary = "Регистрация нового пользователя", responses = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+    })
     @PostMapping()
     public ResponseEntity<Void> register(@RequestBody Register register) {
         authService.register(register);

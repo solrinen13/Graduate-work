@@ -22,7 +22,7 @@ public interface AdMapper {
       @Mapping(target = "image", source = "image", qualifiedByName = "imageToPathString")
       @Mapping(target = "pk", source = "id")
       @Mapping(target = "author", source = "author.id")
-      AdDto toAdDto(Ad ad); // конвертация сущности в DTO
+      AdDto toAdDto(Ad ad);
 
       @Named("imageToPathString")
       default String imageToPathString(Image image) {
@@ -33,7 +33,7 @@ public interface AdMapper {
       @Mapping(target = "id", ignore = true)
       @Mapping(target = "author", ignore = true)
       @Mapping(target = "image", ignore = true)
-      Ad toAdCreate(CreateOrUpdateAdDto dto); // конвертация получить или обновить объявление от автора
+      Ad toAdCreate(CreateOrUpdateAdDto dto);
 
       @Mapping(target = "pk", source = "id")
       @Mapping(target = "authorFirstName", source = "author.firstName")
@@ -42,11 +42,9 @@ public interface AdMapper {
       @Mapping(target = "phone", source = "author.phone")
       @Mapping(target = "description", ignore = true)
       @Mapping(target = "image", source = "image", qualifiedByName = "imageToPathString")
-      ExtendedAdDto toExtendedAdDto(Ad ad); // конвертация объявления к расширенному объявлению
-
+      ExtendedAdDto toExtendedAdDto(Ad ad);
       @Named("authorToInt")
       default Integer authorToInt(User user) {
             return user.getId();
       }
-
 }

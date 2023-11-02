@@ -10,12 +10,25 @@ import java.io.IOException;
 
 public interface UserService {
 
+    /**
+     * Обновление пароля
+     */
+    void newPassword(NewPasswordDto newPasswordDto ,  Authentication authentication);
 
-      void newPassword (NewPasswordDto newPasswordDto ,  Authentication authentication); // обновление пароля
+    /**
+     * Получение информации об авторизованном пользователе
+     * @return {UserDto}
+     */
+    UserDto findAuthUser(Authentication authentication);
 
-      UserDto findAuthUser (Authentication authentication); // получение информации об авторизованном пользователе
+    /**
+     * Обновление информации об авторизованном пользователе
+     * @return {UpdateUserDto}
+     */
+    UpdateUserDto updateUser(UpdateUserDto updateUserDto , Authentication authentication);
 
-      UpdateUserDto updateUser (UpdateUserDto updateUserDto , Authentication authentication); //  обновление информации об авторизованном пользователе
-
-     void updateAvatar (MultipartFile multipartFile , Authentication authentication) throws IOException; // обновление изображения пользователя.
+    /**
+     * Обновление картинки пользователя
+     */
+    void updateAvatar(MultipartFile multipartFile , Authentication authentication) throws IOException;
 }

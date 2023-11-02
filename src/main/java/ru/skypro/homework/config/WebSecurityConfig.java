@@ -89,7 +89,6 @@ public class WebSecurityConfig  {
         return source;
     }
 
-    // Метод создает и настраивает бин для шифрования паролей с использованием BCryptPasswordEncode
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

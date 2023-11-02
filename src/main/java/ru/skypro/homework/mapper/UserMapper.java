@@ -16,10 +16,10 @@ public interface UserMapper {
 
       @Mapping(target = "password", ignore = true)
       @Mapping(target = "image", ignore = true)
-      User toUser(UserDto userDto); // конвертация DTO в сущность
+      User toUser(UserDto userDto);
 
       @Mapping(target = "image", source = "image", qualifiedByName = "imageToPathString")
-      UserDto toUserDto(User user); // конвертация сущности в DTO
+      UserDto toUserDto(User user);
 
       @Named ("imageToPathString")
       default String imageToPathString(Image image) {
@@ -33,13 +33,13 @@ public interface UserMapper {
       @Mapping(target = "email", source = "username")
       @Mapping(target = "image", ignore = true)
       @Mapping(target = "role", defaultValue = "USER")
-      User toUserRegister(Register register); // конвертация получение регистрции от пользователя
+      User toUserRegister(Register register);
 
       @Mapping(source = "email", target = "username")
       Register toRegister(User user);
 
       @Mapping (target = "id", ignore = true)
-      User toUserUpdateUserDto(UpdateUserDto updateUserDto); // конвертация получение изменений пользователя
+      User toUserUpdateUserDto(UpdateUserDto updateUserDto);
 
       UpdateUserDto toUpdateUserDto(User user);
 
