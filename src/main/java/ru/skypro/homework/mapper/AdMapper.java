@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ru.skypro.homework.dto.model_dto.AdDto;
+import ru.skypro.homework.dto.model_dto.AdsDto;
 import ru.skypro.homework.dto.model_dto.CreateOrUpdateAdDto;
 import ru.skypro.homework.dto.model_dto.ExtendedAdDto;
 import ru.skypro.homework.model.Ad;
@@ -25,10 +26,9 @@ public interface AdMapper {
 
       @Named("imageToPathString")
       default String imageToPathString(Image image) {
-            return "/ads/image/" + image.getId();
+            return image != null ? ("/ads/image/" + image.getId()) : null;
       }
 
-      List <AdDto> toAdsDto(List<Ad> ads);
 
       @Mapping(target = "id", ignore = true)
       @Mapping(target = "author", ignore = true)

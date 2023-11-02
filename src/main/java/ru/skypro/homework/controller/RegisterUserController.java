@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.skypro.homework.dto.Register;
-import ru.skypro.homework.security.AuthService;
+import ru.skypro.homework.service.AuthService;
 
 @RestController
 @RequestMapping("/register")
@@ -18,11 +18,8 @@ public class RegisterUserController {
     private final AuthService authService;
 
     @PostMapping()
-    public ResponseEntity<?> register(@RequestBody Register register) {
-        if (authService.register(register)) {
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    public ResponseEntity<Void> register(@RequestBody Register register) {
+        authService.register(register);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

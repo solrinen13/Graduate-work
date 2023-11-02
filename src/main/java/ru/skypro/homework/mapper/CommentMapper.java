@@ -6,29 +6,37 @@ import org.mapstruct.Named;
 import ru.skypro.homework.dto.model_dto.CommentDto;
 import ru.skypro.homework.dto.model_dto.CreateOrUpdateCommentDto;
 import ru.skypro.homework.model.Comment;
+import ru.skypro.homework.model.Image;
+import ru.skypro.homework.model.User;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.List;
 
 @Mapper (componentModel = "spring")
 public interface CommentMapper {
-      List <CommentDto> toCommentsDto(List<Comment> comments);
 
-      @Mapping(source = "id", target = "pk")
-      @Mapping(target = "author", source = "author.id")
+      @Mapping(target = "pk", source = "comment.id")
+      @Mapping(target = "author", source = "user.id")
+      @Mapping(target = "authorImage", source = "user.image", qualifiedByName = "imageToPathString")
+      @Mapping(target = "authorFirstName", source = "user.firstName")
       @Mapping(target = "createdAt", qualifiedByName = "instantToInteger")
-      CommentDto toCommentDto (Comment comment); // конвертация сущности в DTO
+      @Mapping(target = "text", source = "comment.text")
+      CommentDto toCommentDto(Comment comment, User user); // конвертация сущности в DTO
 
       @Mapping(target = "id", ignore = true)
       @Mapping(target = "author", ignore = true)
       @Mapping(target = "createdAt", ignore = true)
-      @Mapping (target = "ad", ignore = true)
-      Comment toCommentyCr (CreateOrUpdateCommentDto dto); // конвертация новых комментарий
+      @Mapping(target = "ad", ignore = true)
+      Comment toComment(CreateOrUpdateCommentDto dto); // конвертация новых комментарий
 
       @Named("instantToInteger")
       default long instantToInteger(Instant instant) {
             return instant.atZone(ZoneOffset.ofHours(3)).toInstant().toEpochMilli();
       }
 
+      @Named("imageToPathString")
+      default String imageToPathString(Image image) {
+            return image != null ? ("/ads/image/" + image.getId()) : null;
+
+      }
 }

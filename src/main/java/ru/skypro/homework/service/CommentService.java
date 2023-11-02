@@ -16,10 +16,10 @@ public interface CommentService {
       List <CommentDto> getAdComments (Integer id); // Получение комментариев объявления
 
       // Добавление комментария к объявлению
-      Comment addCommentToAd (Integer id , CreateOrUpdateCommentDto createOrUpdateCommentDto , Authentication authentication);
+      CommentDto addCommentToAd (Integer id , CreateOrUpdateCommentDto createOrUpdateCommentDto , Authentication authentication);
 
       void deleteComment (Integer adId , Integer commentId , Authentication authentication); // Удаление комментария
 
       // Обновление комментария
-      Comment updateComment (Integer adId , Integer commentId , CreateOrUpdateCommentDto createOrUpdateCommentDto);
+      CommentDto updateComment (Integer adId , Integer commentId , CreateOrUpdateCommentDto createOrUpdateCommentDto);
 }

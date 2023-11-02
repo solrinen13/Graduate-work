@@ -1,7 +1,8 @@
-package ru.skypro.homework.security;
+package ru.skypro.homework.service;
 
 import ru.skypro.homework.dto.Register;
-import ru.skypro.homework.dto.Role;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Интерфейс сервиса для регистрации пользователя и входа
