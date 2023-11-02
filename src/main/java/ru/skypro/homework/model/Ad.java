@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Класс, описывающий объявление
  */
 @Entity // сущность
-@Table (name = "ad")
+@Table (name = "ad_table")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +23,9 @@ public class Ad {
       @JoinColumn(name = "author_id", nullable = false)
       private User author;
 
-      @Column(name = "image")
-      private String image;
+      @OneToOne()
+      @JoinColumn(name = "image_id")
+      private Image image;
 
       @Column(name = "price")
       private Integer price;
@@ -32,4 +33,6 @@ public class Ad {
       @Column(name = "title")
       private String title;
 
+      @Column(name = "description")
+      private String description;
 }
